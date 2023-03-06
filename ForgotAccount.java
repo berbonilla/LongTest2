@@ -1,176 +1,120 @@
 package longExam;
 
 import java.awt.Color;
+
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-
-public class CreateAccount extends finalExam{
-	private static JTextField newUserNameTextField;
-	private static JPasswordField newPasswordField;
-	private static JPasswordField newPasswordField1;
+public class ForgotAccount extends finalExam {
+	private static JTextField txtEmailOrPhone;
+	private static JLabel lblNewLabel;
+	private static JPanel panel_1;
+	private static JLabel lblNewLabel_1;
+	private static JButton btnNewButton;
+	private static JButton btnNewButton_1;
+	public static int userIndex;
 	
-	
-	public CreateAccount() {
-		create_Account();
-	}
-	
-	public static void create_Account() {
-
-		JFrame newAccFrame = new JFrame();
-		newAccFrame.getContentPane().setBackground(Color.WHITE);
-		newAccFrame.setBounds(400,400,438,419);
-		newAccFrame.getContentPane().setLayout(null);
-		newAccFrame.setLocationRelativeTo(null);
-		newAccFrame.setTitle("Sign In");
-		newAccFrame.setResizable(false);
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public static void forgotAcc() {
+		JFrame newFrame = new JFrame();
+		newFrame.getContentPane().setBackground(Color.WHITE);
+		newFrame.setBounds(400,400,591,216);
+		newFrame.getContentPane().setLayout(null);
 		
-		JPanel logInPanel = new JPanel();
-		logInPanel.setBounds(10, 11, 402, 358);
-		newAccFrame.getContentPane().add(logInPanel);
-		logInPanel.setLayout(null);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(0, 0, 575, 137);
+		newFrame.getContentPane().add(panel);
+		panel.setLayout(null);
 		
-		newUserNameTextField = new JTextField(10);
-		newUserNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		newUserNameTextField.setText("Email or Phone Number");
-		newUserNameTextField.setForeground(Color.GRAY);
-		newUserNameTextField.setBounds(10, 104, 382, 43);
-		
-		newUserNameTextField.addFocusListener((FocusListener) new FocusListener() {
+		txtEmailOrPhone = new JTextField();
+		txtEmailOrPhone.setForeground(new Color(192, 192, 192));
+		txtEmailOrPhone.setText("Email or Phone Number");
+		txtEmailOrPhone.setBounds(89, 73, 416, 42);
+		txtEmailOrPhone.setColumns(10);
+		txtEmailOrPhone.addFocusListener((FocusListener) new FocusListener() {
 		 public void focusGained(FocusEvent e) {
-			 if (newUserNameTextField.getText().equals("Input New Password")) {
-				 	newUserNameTextField.setText("");
-				 	newUserNameTextField.setForeground(Color.BLACK);
-	 	        }
-	    }
-		 public void focusLost(FocusEvent e) {
-	        
-	    
-		 }
-	        
-	    });
-		
-		
-	    logInPanel.add(newUserNameTextField);
+		        if (txtEmailOrPhone.getText().equals("Email or Phone Number")) {
+		        	txtEmailOrPhone.setText("");
+		        	txtEmailOrPhone.setForeground(Color.BLACK);
+		        }
+		    }
+			 public void focusLost(FocusEvent e) {
+		        if (txtEmailOrPhone.getText().isEmpty()) {
+		        	txtEmailOrPhone.setForeground(Color.GRAY);
+		        	txtEmailOrPhone.setText("Email or Phone Number");
+		        }
+			 }
 			
-	    newPasswordField = new JPasswordField(10);
-	    newPasswordField.setBounds(10, 158, 297, 43);
-	    newPasswordField.setEchoChar((char)0);
-	    newPasswordField.setText("Input New Password");
-	    newPasswordField.setForeground(Color.GRAY);
-	    newPasswordField.setForeground(Color.BLACK);
-	    newPasswordField.addFocusListener((FocusListener) new FocusListener() {
-	    	 public void focusGained(FocusEvent e) {
-	 	        if (new String(newPasswordField.getPassword()).equals("Input New Password")) {
-	 	        	newPasswordField.setEchoChar('*');
-	 	        	newPasswordField.setText("");
-	 	        	newPasswordField.setForeground(Color.BLACK);
-	 	        }
-	 	    }
-	 		 public void focusLost(FocusEvent e) {
-	 	        if (new String(newPasswordField.getPassword()).equals("Input New Password")) {
-	 	        	newPasswordField.setForeground(Color.GRAY);
-	 	        	newPasswordField.setText("Input New Password");
-	 	        }
-	 		 }
 		    });
-	    
-	    newPasswordField1 = new JPasswordField(10);
-		newPasswordField1.setEchoChar((char)0);
-		newPasswordField1.setText("Repeat Password");
-		newPasswordField1.setForeground(Color.GRAY);
-		newPasswordField1.setBounds(10, 213, 297, 43);
-		newPasswordField1.addFocusListener((FocusListener) new FocusListener() {
-			public void focusGained(FocusEvent e) {
-	 	        if (new String(newPasswordField1.getPassword()).equals("Repeat Password")) {
-	 	        	newPasswordField1.setEchoChar('*');
-	 	        	newPasswordField1.setText("");
-	 	        	newPasswordField1.setForeground(Color.BLACK);
-	 	        }
-	 	    }
-	 		 public void focusLost(FocusEvent e) {
-	 	        if (new String(newPasswordField1.getPassword()).equals("Repeat Password")) {
-	 	        	newPasswordField1.setForeground(Color.GRAY);
-	 	        	newPasswordField1.setText("Repeat Password");
-	 	        }
-	 		 }
-		    });
+		panel.add(txtEmailOrPhone);
 		
-		logInPanel.add(newPasswordField1);
-	    logInPanel.add(newPasswordField);
-	    
-		JButton newAccButt = new JButton("Sign Up");
-		newAccButt.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (newUserNameTextField.getText().equals("") || new String(newPasswordField.getPassword()).equals("") || new String(newPasswordField1.getPassword()).equals(""))
-					JOptionPane.showMessageDialog(null, "Invalid Username/Password!");
-				else {
-					if (new String(newPasswordField.getPassword()).equals(new String(newPasswordField1.getPassword()))) {
-						passList.add(new String(newPasswordField.getPassword()));
-						userList.add(newUserNameTextField.getText());
-						newPasswordField.setText("");
-						newUserNameTextField.setText("");
-						JOptionPane.showMessageDialog(null, "New Account Succesfully Added!");
-						newAccFrame.dispose();
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "Invalid Username/Password!");
-					}
+		lblNewLabel = new JLabel("Find Your Account");
+		lblNewLabel.setBackground(new Color(0, 0, 0));
+		lblNewLabel.setForeground(new Color(0, 0, 0));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setBounds(10, 11, 199, 28);
+		panel.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("Please enter your email or phone number to search for your accoount");
+		lblNewLabel_1.setBounds(89, 50, 416, 14);
+		panel.add(lblNewLabel_1);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(242, 242, 242));
+		panel_1.setBounds(0, 137, 575, 40);
+		newFrame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		btnNewButton = new JButton("Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (userList.contains(txtEmailOrPhone.getText())) {
+					userIndex = userList.indexOf(txtEmailOrPhone.getText());
+					JOptionPane.showMessageDialog(null,"Account Found");
+					new changePass(userIndex);
+					newFrame.dispose();
 				}
+				else {
+					JOptionPane.showMessageDialog(null,"Username Does not Exist");
+				}
+				
 			}
 		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(65, 102, 179));
+		btnNewButton.setBounds(377, 11, 89, 23);
+		panel_1.add(btnNewButton);
 		
-		newAccButt.setFont(new Font("Tahoma", Font.BOLD, 19));
-		newAccButt.setForeground(new Color(255, 255, 255));
-		newAccButt.setBackground(new Color(0, 164, 0));
-		newAccButt.setBounds(138, 283, 153, 37);
-		newAccButt.setBorderPainted(false);
-		logInPanel.add(newAccButt);
-		
-		JLabel lblNewLabel = new JLabel("Sign Up");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 28));
-		lblNewLabel.setBounds(10, 11, 177, 40);
-		logInPanel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Its quick and easy.");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel_1.setBounds(10, 56, 134, 14);
-		logInPanel.add(lblNewLabel_1);
-		
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Show");
-		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.BOLD, 11));
-		chckbxNewCheckBox.addActionListener(ae -> {
-	         JCheckBox c = (JCheckBox) ae.getSource();
-	         newPasswordField.setEchoChar(c.isSelected() ? '\u0000' : (Character)          UIManager.get("PasswordField.echoChar"));
+		btnNewButton_1 = new JButton("Cancel");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finalExam.main_Frame();
+				
+			}
 		});
-		chckbxNewCheckBox.setBounds(321, 168, 97, 23);
-		logInPanel.add(chckbxNewCheckBox);
-		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Show");
-		chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		chckbxNewCheckBox_1.addActionListener(ae -> {
-	         JCheckBox c = (JCheckBox) ae.getSource();
-	         newPasswordField1.setEchoChar(c.isSelected() ? '\u0000' : (Character)          UIManager.get("PasswordField.echoChar"));
-		});
-		chckbxNewCheckBox_1.setBounds(321, 223, 97, 23);
-		logInPanel.add(chckbxNewCheckBox_1);
-		newAccFrame.setVisible(true);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnNewButton_1.setBounds(476, 11, 89, 23);
+		panel_1.add(btnNewButton_1);
+		newFrame.setLocationRelativeTo(null);
+		newFrame.setTitle("Account recovery");
+		newFrame.setVisible(true);
+		newFrame.setResizable(false);
 		
 	}
-
 }
